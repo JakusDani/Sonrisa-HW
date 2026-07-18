@@ -143,3 +143,12 @@ Simple in-memory store using `ConcurrentDictionary<Guid, T>` collections for `Al
 18. Build Notification Logs UI — Table (Time, Alert, Channel, Message, Status) fetched from `/logs`, with a manual/auto refresh after each simulation.
 19. Add polish — Loading spinners/skeletons, success/error snackbars, empty states, and delete confirmation dialog across Alerts/Admin/Logs pages.
 20. Write `PLAN.md` reference notes / README updates — Document how to run backend (`dotnet run`) and frontend (`npm run dev`), and note the `INotificationQueue` seam for future real RabbitMQ swap-in.
+
+## Reference Notes (Step 20)
+
+All 20 steps are implemented. See [README.md](../README.md) at the repository root for:
+
+- Prerequisites (.NET 10 SDK, Node.js + npm)
+- How to run the backend: `cd src/Api && dotnet run` (listens on `https://localhost:7235` / `http://localhost:5171`)
+- How to run the frontend: `cd frontend && npm install && npm run dev` (runs on `http://localhost:5173`)
+- The `INotificationQueue` seam and what swapping in a real RabbitMQ implementation later would require (a new `INotificationQueue` implementation + one DI registration change in `Program.cs` — no feature slice changes).
