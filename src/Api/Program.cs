@@ -5,6 +5,7 @@ using Api.Features.Alerts.CreateAlert;
 using Api.Features.Alerts.DeleteAlert;
 using Api.Features.Alerts.GetAlerts;
 using Api.Features.Alerts.UpdateAlert;
+using Api.Features.Logs.GetLogs;
 
 const string ViteClientPolicy = "ViteClient";
 
@@ -45,7 +46,6 @@ CreateAlertEndpoint.Map(app);
 DeleteAlertEndpoint.Map(app);
 UpdateAlertEndpoint.Map(app);
 SimulateEventEndpoint.Map(app);
-
-// Logs feature endpoint mapping is wired here in a later step.
+GetLogsEndpoint.Map(app);
 
 app.Run();
