@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack'
 import MuiAlert from '@mui/material/Alert'
 import { useLogs } from '../hooks/useLogs'
 import NotificationLogsTable from '../components/NotificationLogsTable'
-import LoadingSpinner from '../components/LoadingSpinner'
+import ListSkeleton from '../components/ListSkeleton'
 
 function NotificationLogsPage() {
   const { logs, loading, error, refresh } = useLogs()
@@ -27,7 +27,7 @@ function NotificationLogsPage() {
         </Button>
       </Stack>
 
-      {loading && <LoadingSpinner />}
+      {loading && <ListSkeleton rows={5} />}
 
       {!loading && error && <MuiAlert severity="error">{error}</MuiAlert>}
 

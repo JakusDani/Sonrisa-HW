@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
+import CircularProgress from '@mui/material/CircularProgress'
 import { EventTypeValues, type EventType } from '../types/alert'
 import type { SimulateEventRequest } from '../types/admin'
 
@@ -52,6 +53,7 @@ function SimulateEventForm({ submitting, onSubmit }: SimulateEventFormProps) {
         variant="contained"
         onClick={_handleSubmit}
         disabled={!_isValid || submitting}
+        startIcon={submitting ? <CircularProgress size={16} color="inherit" /> : undefined}
       >
         Fire Event
       </Button>

@@ -13,6 +13,7 @@ function AdminSimulatorPage() {
   const [submitting, setSubmitting] = useState(false)
   const [result, setResult] = useState<SimulateEventResponse | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   const _handleSubmit = async (request: SimulateEventRequest) => {
     setSubmitting(true)
@@ -20,6 +21,7 @@ function AdminSimulatorPage() {
     try {
       const response = await simulateEvent(request)
       setResult(response)
+      setSuccessMessage('Event simulated successfully.')
     } catch {
       setError('Failed to simulate event.')
     } finally {
@@ -57,6 +59,16 @@ function AdminSimulatorPage() {
       <Snackbar open={error !== null} autoHideDuration={4000} onClose={() => setError(null)}>
         <MuiAlert severity="error" onClose={() => setError(null)} sx={{ width: '100%' }}>
           {error}
+        </MuiAlert>
+      </Snackbar>
+
+      <Snackbar
+        open={successMessage !== null}
+        autoHideDuration={3000}
+        onClose={() => setSuccessMessage(null)}
+      >
+        <MuiAlert severity="success" onClose={() => setSuccessMessage(null)} sx={{ width: '100%' }}>
+          {successMessage}
         </MuiAlert>
       </Snackbar>
     </Container>

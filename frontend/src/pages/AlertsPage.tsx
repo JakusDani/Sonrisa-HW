@@ -9,7 +9,7 @@ import { useAlerts } from '../hooks/useAlerts'
 import AlertList from '../components/AlertList'
 import AlertFormDialog from '../components/AlertFormDialog'
 import ConfirmDeleteDialog from '../components/ConfirmDeleteDialog'
-import LoadingSpinner from '../components/LoadingSpinner'
+import ListSkeleton from '../components/ListSkeleton'
 import type { Alert, CreateAlertRequest } from '../types/alert'
 
 function AlertsPage() {
@@ -46,7 +46,7 @@ function AlertsPage() {
         </Button>
       </Stack>
 
-      {loading && <LoadingSpinner />}
+      {loading && <ListSkeleton />}
 
       {!loading && error && <MuiAlert severity="error">{error}</MuiAlert>}
 
@@ -77,8 +77,11 @@ function AlertsPage() {
         open={snackbarMessage !== null}
         autoHideDuration={3000}
         onClose={() => setSnackbarMessage(null)}
-        message={snackbarMessage}
-      />
+      >
+        <MuiAlert severity="success" onClose={() => setSnackbarMessage(null)} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </Container>
   )
 }
