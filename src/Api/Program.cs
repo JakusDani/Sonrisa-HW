@@ -1,5 +1,6 @@
 using Api.Common.Data;
 using Api.Common.Notifications;
+using Api.Features.Admin.SimulateEvent;
 using Api.Features.Alerts.CreateAlert;
 using Api.Features.Alerts.DeleteAlert;
 using Api.Features.Alerts.GetAlerts;
@@ -43,7 +44,8 @@ GetAlertsEndpoint.Map(app);
 CreateAlertEndpoint.Map(app);
 DeleteAlertEndpoint.Map(app);
 UpdateAlertEndpoint.Map(app);
+SimulateEventEndpoint.Map(app);
 
-// Admin and Logs feature endpoint mappings are wired here in later steps.
+// Logs feature endpoint mapping is wired here in a later step.
 
 app.Run();
