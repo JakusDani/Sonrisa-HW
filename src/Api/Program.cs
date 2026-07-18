@@ -1,4 +1,5 @@
 using Api.Common.Data;
+using Api.Common.Notifications;
 
 const string ViteClientPolicy = "ViteClient";
 
@@ -14,8 +15,9 @@ builder.Services.AddCors(options => options.AddPolicy(ViteClientPolicy, policy =
     .AllowAnyMethod()));
 
 builder.Services.AddSingleton<FakeDatabase>();
+builder.Services.AddSingleton<INotificationChannelFactory, NotificationChannelFactory>();
 
-// Notification pipeline and feature slices are registered here in later steps.
+// Notification queue/consumer and feature slices are registered here in later steps.
 
 var app = builder.Build();
 
