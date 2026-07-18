@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Api.Common.Data;
 using Api.Common.Notifications;
 using Api.Features.Admin.SimulateEvent;
@@ -15,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddCors(options => options.AddPolicy(ViteClientPolicy, policy => policy
     .WithOrigins("http://localhost:5173", "https://localhost:5173")
