@@ -29,9 +29,7 @@ public class ExceptionHandlingMiddleware
 
     private async Task _HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        var statusCode = exception is ArgumentException
-            ? (int)HttpStatusCode.BadRequest
-            : (int)HttpStatusCode.InternalServerError;
+        var statusCode = _MapStatusCode(exception);
 
         _logger.LogError(exception, "Unhandled exception occurred while processing {Method} {Path}", context.Request.Method, context.Request.Path);
 
@@ -41,5 +39,16 @@ public class ExceptionHandlingMiddleware
         context.Response.StatusCode = statusCode;
 
         await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+    }
+
+    private static int _MapStatusCode(Exception exception)
+    {
+        var statusCode = exception switch
+        {
+            ArgumentException => (int)HttpStatusCode.BadRequest,
+            KeyNotFoundException => (int)HttpStatusCode.NotFound,
+            _ => (int)HttpStatusCode.InternalServerError
+        };
+        return statusCode;
     }
 }

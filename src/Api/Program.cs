@@ -21,12 +21,11 @@ builder.Services.AddCors(options => options.AddPolicy(ViteClientPolicy, policy =
     .AllowAnyHeader()
     .AllowAnyMethod()));
 
+// Notification pipeline: FakeDatabase (store), channel factory (Strategy), in-memory queue, and dispatch consumer (BackgroundService).
 builder.Services.AddSingleton<FakeDatabase>();
 builder.Services.AddSingleton<INotificationChannelFactory, NotificationChannelFactory>();
 builder.Services.AddSingleton<INotificationQueue, InMemoryNotificationQueue>();
 builder.Services.AddHostedService<NotificationDispatchConsumer>();
-
-// Feature slices are registered here in later steps.
 
 var app = builder.Build();
 
@@ -43,6 +42,7 @@ app.UseCors(ViteClientPolicy);
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseMiddleware<RequestLoggingMiddleware>();
 
+// Feature slice endpoint mappings (Vertical Slice Architecture).
 GetAlertsEndpoint.Map(app);
 CreateAlertEndpoint.Map(app);
 DeleteAlertEndpoint.Map(app);

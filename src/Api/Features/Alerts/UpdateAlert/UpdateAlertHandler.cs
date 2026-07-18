@@ -7,6 +7,11 @@ public static class UpdateAlertHandler
 {
     public static UpdateAlertResponse? Handle(UpdateAlertCommand command, FakeDatabase database)
     {
+        if (!UpdateAlertValidator.IsValid(command))
+        {
+            throw new ArgumentException("Alert name is required and at least one channel must be enabled.");
+        }
+
         var updated = database.UpdateAlert(command.Id, existing => new Alert
         {
             Id = existing.Id,
