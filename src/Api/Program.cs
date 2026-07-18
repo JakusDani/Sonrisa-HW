@@ -6,6 +6,7 @@ using Api.Features.Alerts.DeleteAlert;
 using Api.Features.Alerts.GetAlerts;
 using Api.Features.Alerts.UpdateAlert;
 using Api.Features.Logs.GetLogs;
+using Api.Middleware;
 
 const string ViteClientPolicy = "ViteClient";
 
@@ -39,7 +40,8 @@ app.UseHttpsRedirection();
 
 app.UseCors(ViteClientPolicy);
 
-// Custom middleware is wired here in a later step.
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 GetAlertsEndpoint.Map(app);
 CreateAlertEndpoint.Map(app);
