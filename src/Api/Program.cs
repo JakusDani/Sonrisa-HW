@@ -16,8 +16,9 @@ builder.Services.AddCors(options => options.AddPolicy(ViteClientPolicy, policy =
 
 builder.Services.AddSingleton<FakeDatabase>();
 builder.Services.AddSingleton<INotificationChannelFactory, NotificationChannelFactory>();
+builder.Services.AddSingleton<INotificationQueue, InMemoryNotificationQueue>();
 
-// Notification queue/consumer and feature slices are registered here in later steps.
+// Notification consumer and feature slices are registered here in later steps.
 
 var app = builder.Build();
 
