@@ -1,3 +1,5 @@
+using Api.Common.Data;
+
 const string ViteClientPolicy = "ViteClient";
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,9 @@ builder.Services.AddCors(options => options.AddPolicy(ViteClientPolicy, policy =
     .AllowAnyHeader()
     .AllowAnyMethod()));
 
-// Feature slices, notification pipeline, and FakeDatabase are registered here in later steps.
+builder.Services.AddSingleton<FakeDatabase>();
+
+// Notification pipeline and feature slices are registered here in later steps.
 
 var app = builder.Build();
 
