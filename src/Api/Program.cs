@@ -1,5 +1,9 @@
 using Api.Common.Data;
 using Api.Common.Notifications;
+using Api.Features.Alerts.CreateAlert;
+using Api.Features.Alerts.DeleteAlert;
+using Api.Features.Alerts.GetAlerts;
+using Api.Features.Alerts.UpdateAlert;
 
 const string ViteClientPolicy = "ViteClient";
 
@@ -33,6 +37,13 @@ app.UseHttpsRedirection();
 
 app.UseCors(ViteClientPolicy);
 
-// Custom middleware and feature endpoint mappings are wired here in later steps.
+// Custom middleware is wired here in a later step.
+
+GetAlertsEndpoint.Map(app);
+CreateAlertEndpoint.Map(app);
+DeleteAlertEndpoint.Map(app);
+UpdateAlertEndpoint.Map(app);
+
+// Admin and Logs feature endpoint mappings are wired here in later steps.
 
 app.Run();
